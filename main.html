@@ -3,73 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Verification</title>
+    <title>Verification</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-        }
         #verification_heading {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            text-align: center;
+            margin-top: 20px;
         }
         #verification_subtext {
-            font-size: 1rem;
-            margin-bottom: 20px;
-            color: #555;
+            text-align: center;
+            margin-top: 10px;
         }
         .code-container {
             display: flex;
-            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
         }
         .code {
             width: 40px;
             height: 40px;
-            font-size: 1.5rem;
+            font-size: 20px;
             text-align: center;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-        }
-        .code:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            margin: 5px;
+            border: 2px solid #000;
         }
     </style>
 </head>
 <body>
-    <h1 id="verification_heading">OTP Verification</h1>
-    <p id="verification_subtext">Please enter the 6-digit code sent to your email.</p>
+    <h1 id="verification_heading">Verify Your Account</h1>
+    <p id="verification_subtext">Please enter the 6-digit code sent to your device</p>
     <div class="code-container">
-        <input type="text" maxlength="1" class="code" id="code-1" />
-        <input type="text" maxlength="1" class="code" id="code-2" />
-        <input type="text" maxlength="1" class="code" id="code-3" />
-        <input type="text" maxlength="1" class="code" id="code-4" />
-        <input type="text" maxlength="1" class="code" id="code-5" />
-        <input type="text" maxlength="1" class="code" id="code-6" />
+        <input type="text" id="code-1" class="code" maxlength="1">
+        <input type="text" id="code-2" class="code" maxlength="1">
+        <input type="text" id="code-3" class="code" maxlength="1">
+        <input type="text" id="code-4" class="code" maxlength="1">
+        <input type="text" id="code-5" class="code" maxlength="1">
+        <input type="text" id="code-6" class="code" maxlength="1">
     </div>
-    <script>
-        const codes = document.querySelectorAll('.code');
 
-        codes.forEach((code, idx) => {
-            code.addEventListener('input', () => {
-                if (code.value.length > 0 && idx < codes.length - 1) {
-                    codes[idx + 1].focus();
+    <script>
+        const inputs = document.querySelectorAll('.code');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value !== '') {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
                 }
             });
 
-            code.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && code.value === '' && idx > 0) {
-                    codes[idx - 1].focus();
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && index > 0 && input.value === '') {
+                    inputs[index - 1].focus();
                 }
             });
         });
+
+        inputs[0].focus();
     </script>
 </body>
 </html>
